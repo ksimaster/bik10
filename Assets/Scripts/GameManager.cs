@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public Image botoesFundo;
     public Image fotoMaria;
     public Sprite [] imageGirl;
+   // public Sprite bigImage;
 
     public Button botao1;
     public Button botao2;
@@ -1800,7 +1801,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-	public IEnumerator createNewNoticiaFromYou(float preDelay=0f, float posDelay=0f)
+    public IEnumerator createNewNoticiaFromYou(float preDelay=0f, float posDelay=0f)
     {
         if (preDelay == 0f) {
             preDelay = messagePreDelay;
