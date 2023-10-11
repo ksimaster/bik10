@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public Image cabecalho;
     public Image botoesFundo;
     public Image fotoMaria;
+    public Sprite [] imageGirl;
 
     public Button botao1;
     public Button botao2;
@@ -102,12 +103,12 @@ public class GameManager : MonoBehaviour
         // o posdelay ta configurado pra ser executado antes de deletar
 
         //   ------------------>>>>>>   EXEMPLO DE USO DOS DELAYS   deletar?  predelay   posdelay
-        yield return createImageFromYou("");
+        yield return createImageFromYou(0, "");
         yield return createNewMessageFromYou("oiee, tudo bem?🙏",   false,    3f,       5f);
         yield return createNewMessageFromYou("vi a foto que você postou");
         yield return createNewMessageFromYou("voltou pra cidade?");
         yield return createNewMessageFromMe("oii, tudo bem e você?");
-        yield return createImageFromYou("");
+        yield return createImageFromYou(1, "");
 
         setButtonOptionsAndShow(
             "Sim, voltei pra ver a família nas férias", () => StartCoroutine(chat2()),
@@ -124,7 +125,7 @@ public class GameManager : MonoBehaviour
         yield return createNewMessageFromMe("Sim, voltei pra ver a família nas férias");
         yield return createNewMessageFromYou("Ah, que bom!");
         yield return createNewMessageFromYou("Faz tempo que a gente não conversa, né?");
-
+        yield return createImageFromYou(2, "");
         setButtonOptionsAndShow(
             "Faz desde que eu me mudei, na verdade", () => StartCoroutine(chat5()),
             "Nem parece que faz três anos, né?", () => StartCoroutine(chat6()),
@@ -1787,8 +1788,9 @@ public class GameManager : MonoBehaviour
         yield return waitSecondsAndCreateDialogChat(rightMessagePrefab, mensagem, vaiSerDeletada, preDelay, posDelay);
     }
 
-    public IEnumerator createImageFromYou(string mensagem = "", bool vaiSerDeletada = false, float preDelay = 0f, float posDelay = 0f)
+    public IEnumerator createImageFromYou(int numberFoto, string mensagem = "", bool vaiSerDeletada = false, float preDelay = 0f, float posDelay = 0f)
     {
+        imageLeftMessagePrefab.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = imageGirl[numberFoto];
         yield return waitSecondsAndCreateDialogChat(imageLeftMessagePrefab, mensagem, vaiSerDeletada, preDelay, posDelay);
     }
 
