@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
     public GameObject contentConversation;
     public GameObject rightMessagePrefab;
     public GameObject leftMessagePrefab;
-	public GameObject noticiaPrefab;
+    public GameObject imageLeftMessagePrefab;
+    public GameObject noticiaPrefab;
     public float messagePreDelay = 3.0f; // Tempo de atraso entre as mensagens
     public float messagePosDelay = 3.0f; // Tempo de atraso entre as mensagens
 
@@ -101,10 +102,12 @@ public class GameManager : MonoBehaviour
         // o posdelay ta configurado pra ser executado antes de deletar
 
         //   ------------------>>>>>>   EXEMPLO DE USO DOS DELAYS   deletar?  predelay   posdelay
+        yield return createImageFromYou("");
         yield return createNewMessageFromYou("oiee, tudo bem?🙏",   false,    3f,       5f);
         yield return createNewMessageFromYou("vi a foto que você postou");
         yield return createNewMessageFromYou("voltou pra cidade?");
         yield return createNewMessageFromMe("oii, tudo bem e você?");
+        yield return createImageFromYou("");
 
         setButtonOptionsAndShow(
             "Sim, voltei pra ver a família nas férias", () => StartCoroutine(chat2()),
@@ -1782,6 +1785,11 @@ public class GameManager : MonoBehaviour
     public IEnumerator createNewMessageFromMe(string mensagem, bool vaiSerDeletada=false, float preDelay=0f, float posDelay=0f)
     {
         yield return waitSecondsAndCreateDialogChat(rightMessagePrefab, mensagem, vaiSerDeletada, preDelay, posDelay);
+    }
+
+    public IEnumerator createImageFromYou(string mensagem = "", bool vaiSerDeletada = false, float preDelay = 0f, float posDelay = 0f)
+    {
+        yield return waitSecondsAndCreateDialogChat(imageLeftMessagePrefab, mensagem, vaiSerDeletada, preDelay, posDelay);
     }
 
     public IEnumerator createNewMessageFromYou(string mensagem, bool vaiSerDeletada=false, float preDelay=0f, float posDelay=0f)
