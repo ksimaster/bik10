@@ -18,6 +18,11 @@ public class PanelController : MonoBehaviour
 
     void Update()
     {
+        if (panel.activeSelf) 
+        {
+            timer = timerDuration;
+            isTimerRunning = false;
+        } 
         if (isTimerRunning)
         {
             timer -= Time.deltaTime;

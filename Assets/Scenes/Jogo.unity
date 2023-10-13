@@ -846,7 +846,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 256008822}
-  timerDuration: 6
+  timerDuration: 10
 --- !u!114 &245598388
 MonoBehaviour:
   m_ObjectHideFlags: 0
