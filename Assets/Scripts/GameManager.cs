@@ -7,7 +7,11 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
-
+    public float timeFromMe;
+    public float timeToMe;
+    public float timeFoto;
+   
+    
     public GameObject contentConversation;
     public GameObject rightMessagePrefab;
     public GameObject leftMessagePrefab;
@@ -1787,18 +1791,23 @@ public class GameManager : MonoBehaviour
     public IEnumerator createNewMessageFromMe(string mensagem, bool vaiSerDeletada=false, float preDelay=0f, float posDelay=0f)
     {
         yield return waitSecondsAndCreateDialogChat(rightMessagePrefab, mensagem, vaiSerDeletada, preDelay, posDelay);
+        PlayerPrefs.SetFloat("Timer", PlayerPrefs.GetFloat("Timer") - timeFromMe);
+        Debug.Log(PlayerPrefs.GetFloat("Timer"));
     }
 
     public IEnumerator createImageFromYou(int numberFoto, string mensagem = "", bool vaiSerDeletada = false, float preDelay = 0f, float posDelay = 0f)
     {
         imageLeftMessagePrefab.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = imageGirl[numberFoto];
         yield return waitSecondsAndCreateDialogChat(imageLeftMessagePrefab, mensagem, vaiSerDeletada, preDelay, posDelay);
+        PlayerPrefs.SetFloat("Timer", PlayerPrefs.GetFloat("Timer") - timeFoto);
+        Debug.Log(PlayerPrefs.GetFloat("Timer"));
     }
 
     public IEnumerator createNewMessageFromYou(string mensagem, bool vaiSerDeletada=false, float preDelay=0f, float posDelay=0f)
     {
         yield return waitSecondsAndCreateDialogChat(leftMessagePrefab, mensagem, vaiSerDeletada, preDelay, posDelay);
-
+        PlayerPrefs.SetFloat("Timer", PlayerPrefs.GetFloat("Timer") - timeToMe);
+        Debug.Log(PlayerPrefs.GetFloat("Timer"));
     }
 
     public IEnumerator createNewNoticiaFromYou(float preDelay=0f, float posDelay=0f)

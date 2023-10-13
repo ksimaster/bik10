@@ -846,7 +846,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 256008822}
-  timerDuration: 10
+  timerDuration: 180
 --- !u!114 &245598388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5575,6 +5575,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1ac485620a7bac4f96430cf6356398f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeFromMe: 5
+  timeToMe: 3
+  timeFoto: 10
   contentConversation: {fileID: 4300733110719974700}
   rightMessagePrefab: {fileID: 4357653817745920119, guid: 0fc53b1bc8ae7194f833c0cdd1281eed, type: 3}
   leftMessagePrefab: {fileID: 6994099806256659394, guid: 414269132cac26845816113bc96ee493, type: 3}

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ButtonController : MonoBehaviour
 {
     public GameObject panel;
-    public int clickCount = 10;
+    public int clickCount;
 
     private int currentClickCount;
     public Slider slider;
@@ -17,12 +17,13 @@ public class ButtonController : MonoBehaviour
         if (!PlayerPrefs.HasKey("currentClickCount")) PlayerPrefs.SetInt("currentClickCount", 0);
         currentClickCount = PlayerPrefs.GetInt("currentClickCount");
         clickCount = PlayerPrefs.GetInt("maxCount");
-        if (currentClickCount < clickCount)
+        if (currentClickCount < clickCount && PlayerPrefs.GetFloat("Timer") < 20)
         {
             panel.SetActive(true);
             slider.maxValue = clickCount;
             slider.value = clickCount - currentClickCount;
         }
+        
        // slider.maxValue = clickCount;
        // slider.value = clickCount - currentClickCount;
     }

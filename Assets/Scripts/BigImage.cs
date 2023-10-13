@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class BigImage : MonoBehaviour
 {
     private GameObject bigImage;
+    public float timeFotoBig = 10f;
 
     private void Start()
     {
@@ -15,6 +16,8 @@ public class BigImage : MonoBehaviour
     }
     public void ToBigImage()
     {
+        PlayerPrefs.SetFloat("Timer", PlayerPrefs.GetFloat("Timer") - timeFotoBig);
+        Debug.Log(PlayerPrefs.GetFloat("Timer"));
         bigImage.SetActive(true);
         bigImage.transform.GetChild(0).gameObject.SetActive(true);
 
