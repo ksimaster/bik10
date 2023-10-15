@@ -10,7 +10,7 @@ public class PanelController : MonoBehaviour
     private float timer;
     private bool isTimerRunning;
 
-    void Start()
+    void Awake()
     {
         if (!PlayerPrefs.HasKey("Timer")) PlayerPrefs.SetFloat("Timer", timerDuration);
         timer = timerDuration;

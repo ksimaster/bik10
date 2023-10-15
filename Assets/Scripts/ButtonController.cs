@@ -11,7 +11,7 @@ public class ButtonController : MonoBehaviour
     private int currentClickCount;
     public Slider slider;
 
-    void Start()
+    private void Start()
     {
         if (!PlayerPrefs.HasKey("maxCount")) PlayerPrefs.SetInt("maxCount", clickCount);
         if (!PlayerPrefs.HasKey("currentClickCount")) PlayerPrefs.SetInt("currentClickCount", 0);
