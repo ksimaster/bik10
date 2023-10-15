@@ -7,6 +7,7 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Discharge")]
     public float timeFromMe;
     public float timeToMe;
     public float timeFoto;
@@ -19,6 +20,8 @@ public class GameManager : MonoBehaviour
     public GameObject noticiaPrefab;
     public float messagePreDelay = 3.0f; // Tempo de atraso entre as mensagens
     public float messagePosDelay = 3.0f; // Tempo de atraso entre as mensagens
+    public float messageMaxPreDelay = 1.0f; // max var, for reset after fast load
+    public float messageMaxPosDelay = 1.0f; // max var, for reset after fast load
 
     public TMP_Text statusMaria;
     public Image cabecalho;
@@ -77,6 +80,11 @@ public class GameManager : MonoBehaviour
     public Image SomOn;
     public Image SomOff;
 
+    //for save
+    
+    private int numberPoint;
+    private string saveKey = "Maria";
+
     void Start()
     {
         textoBotao1 = botao1.GetComponentInChildren<TMP_Text>();
@@ -89,13 +97,69 @@ public class GameManager : MonoBehaviour
         //Quarta Feira 22:40
         novoDia = "Qua 22:40";
         dia.text = novoDia;
-        
-        StartCoroutine(Chat1());
+
+        //StartCoroutine(Chat1());
+        Load();
+        StartCoroutine(CheckPointCorutine(numberPoint));
     }
 
     void Update()
     {
         UpdateTransition();
+    }
+
+    private void Load()
+    {
+        var data = SaveManager.Load<SaveData.PlayerProfile>(saveKey);
+        numberPoint = data.checkPoint;
+    }
+    private void Save()
+    {
+        SaveManager.Save(saveKey, GetSaveData());
+    }
+
+    private SaveData.PlayerProfile GetSaveData()
+    {
+        var data = new SaveData.PlayerProfile()
+        {
+            
+            checkPoint = numberPoint
+        };
+
+        return data;
+    }
+
+    public IEnumerator CheckPointCorutine(int numberCheckPoint)
+    {
+
+        switch (numberCheckPoint)
+        {
+            case 0:
+                messagePreDelay = 0.0001f;
+                messagePosDelay = 0.0001f;
+                yield return Chat1();
+                messagePreDelay = messageMaxPreDelay;
+                messagePosDelay = messageMaxPosDelay;
+
+                break;
+            case 1:
+                messagePreDelay = 0.0001f;
+                messagePosDelay = 0.0001f;
+                yield return Chat1();
+                yield return chat2();
+                messagePreDelay = messageMaxPreDelay;
+                messagePosDelay = messageMaxPosDelay;
+                break;
+            case 2:
+                messagePreDelay = 0.0001f;
+                messagePosDelay = 0.0001f;
+                yield return Chat1();
+                yield return chat2();
+                yield return chat5();
+                messagePreDelay = messageMaxPreDelay;
+                messagePosDelay = messageMaxPosDelay;
+                break;
+        }
     }
 
     public IEnumerator Chat1()
@@ -108,12 +172,13 @@ public class GameManager : MonoBehaviour
         // o posdelay ta configurado pra ser executado antes de deletar
 
         //   ------------------>>>>>>   EXEMPLO DE USO DOS DELAYS   deletar?  predelay   posdelay
-        yield return createImageFromYou(0, "");
-        yield return createNewMessageFromYou("oiee, tudo bem?🙏",   false,    3f,       5f);
+        //yield return createImageFromYou(0, "");
+        yield return createNewMessageFromYou("oiee, tudo bem?🙏",   false,    0f,       0f);
         yield return createNewMessageFromYou("vi a foto que você postou");
         yield return createNewMessageFromYou("voltou pra cidade?");
         yield return createNewMessageFromMe("oii, tudo bem e você?");
         yield return createImageFromYou(1, "");
+        
 
         setButtonOptionsAndShow(
             "Sim, voltei pra ver a família nas férias", () => StartCoroutine(chat2()),
@@ -131,6 +196,8 @@ public class GameManager : MonoBehaviour
         yield return createNewMessageFromYou("Ah, que bom!");
         yield return createNewMessageFromYou("Faz tempo que a gente não conversa, né?");
         yield return createImageFromYou(2, "");
+        numberPoint = 1;
+        Save();
         setButtonOptionsAndShow(
             "Faz desde que eu me mudei, na verdade", () => StartCoroutine(chat5()),
             "Nem parece que faz três anos, né?", () => StartCoroutine(chat6()),
@@ -178,6 +245,8 @@ public class GameManager : MonoBehaviour
         yield return createNewMessageFromMe("Faz desde que eu me mudei, na verdade");
         yield return createNewMessageFromYou("A gente tava andando de bicicleta");
         yield return createNewMessageFromYou("Saudades demais da nossa infância");
+        numberPoint = 2;
+        Save();
 
         setButtonOptionsAndShow(
            "Caraca o tempo voa", () => StartCoroutine(chat8()),

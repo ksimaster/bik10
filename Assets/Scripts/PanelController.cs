@@ -4,26 +4,40 @@ using UnityEngine;
 
 public class PanelController : MonoBehaviour
 {
-    public GameObject panel;
+    public GameObject panelCharge;
+    public GameObject panelContact;
+
     public float timerDuration;
 
     private float timer;
     private bool isTimerRunning;
+    private float beforeLoadTimer;
 
     void Awake()
     {
         if (!PlayerPrefs.HasKey("Timer")) PlayerPrefs.SetFloat("Timer", timerDuration);
         timer = timerDuration;
         isTimerRunning = true;
+        beforeLoadTimer = PlayerPrefs.GetFloat("Timer");
     }
 
     void Update()
     {
-        if (panel.activeSelf) 
+        if (panelContact.activeSelf)
+        {
+            isTimerRunning = false;
+            PlayerPrefs.SetFloat("Timer", beforeLoadTimer);
+        }
+        else if (panelCharge.activeSelf)
         {
             timer = timerDuration;
             isTimerRunning = false;
-        } 
+        }
+        else
+        {
+            isTimerRunning = true;
+            beforeLoadTimer = PlayerPrefs.GetFloat("Timer");
+        }
         if (isTimerRunning)
         {
             timer = PlayerPrefs.GetFloat("Timer");
@@ -31,7 +45,7 @@ public class PanelController : MonoBehaviour
             PlayerPrefs.SetFloat("Timer", timer);
             if (timer <= 0f)
             {
-                panel.SetActive(true);
+                panelCharge.SetActive(true);
                 timer = timerDuration;
                 PlayerPrefs.SetFloat("Timer", timer);
                 isTimerRunning = false;
@@ -40,7 +54,7 @@ public class PanelController : MonoBehaviour
         else
         {
             
-            if (!panel.activeSelf)
+            if (!panelCharge.activeSelf)
             {
                 //timer = timerDuration;
                 isTimerRunning = true;
@@ -51,7 +65,7 @@ public class PanelController : MonoBehaviour
 
     void OnDisable()
     {
-        panel.SetActive(false);
+        panelCharge.SetActive(false);
         timer = timerDuration;
         isTimerRunning = true;
     }
