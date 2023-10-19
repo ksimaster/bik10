@@ -187,7 +187,7 @@ public class GameManager : MonoBehaviour
         setButtonOptionsAndShow(
     "Тогда я тот, кто может тебе помочь!...", () => StartCoroutine(chat3()),
     "Это классно! Ты занималась где-то?", () => StartCoroutine(chat34()),
-    "CLOSE3", () => StartCoroutine(chat4()));
+    "Думал, сможешь скинуть фотки посмотреть!", () => StartCoroutine(chat69()));
         numberPoint = 1;
         Save();
     
@@ -592,7 +592,7 @@ public class GameManager : MonoBehaviour
         yield return createNewMessageFromYou("А почему ты спрашиваешь?");
         setButtonOptionsAndShow(
        "Я подбираю материал для сайта.", () => StartCoroutine(chat35()),
-       "Я начинающий фотограф и мне нужна модель. Ты можешь мне в этом помочь?", () => StartCoroutine(chat34()),
+       "Я начинающий фотограф и мне нужна модель.", () => StartCoroutine(chat63()),
        "CLOSE3", () => StartCoroutine(chat35())
        );
     }
@@ -919,14 +919,17 @@ public class GameManager : MonoBehaviour
         Debug.Log("Cha63");
         ButtonPanel.SetActive(false);
 
-        yield return createNewMessageFromMe("Se falemo");
-        yield return createNewMessageFromMe("Boa noite");
 
-        textoFadeImage.text = "Hoje foi um dia bom";
-        diaFadeImage.text = "Dom 12:40";
-        posTransicao = "chat64";
-        novoDia = "Dom 12:40";
-        animationEnabled = true;
+        yield return createNewMessageFromMe("Я начинающий фотограф и мне нужна модель.");
+        yield return createNewMessageFromMe("Ты можешь мне в этом помочь?");
+        yield return createNewMessageFromYou("Я думаю, вряд ли.");
+        yield return createNewMessageFromYou("Я не так хороша, как модель, пока.");
+        setButtonOptionsAndShow(
+     "Скинь фото. А я смогу оценить!", () => StartCoroutine(chat64()),
+     "CLOSE2", () => StartCoroutine(chat62()),
+     "CLOSE3", () => StartCoroutine(chat63())
+
+     );
     }
 
     public IEnumerator chat64()
@@ -935,17 +938,15 @@ public class GameManager : MonoBehaviour
         Debug.Log("Cha64");
         ButtonPanel.SetActive(false);
 
-        yield return createNewMessageFromMe("oii");
-        yield return createNewMessageFromMe("sobre o teres hj");
-        yield return createNewMessageFromMe("pode as 17:00?");
-        yield return createNewMessageFromYou("Oii");
-        yield return createNewMessageFromYou("Pode ser mais cedo?");
-        yield return createNewMessageFromYou("Não posso chegar muito tarde em casa");
+        yield return createNewMessageFromMe("Скинь фото. А я смогу оценить!");
+        yield return createNewMessageFromMe("Думаю там всё классно :)");
+        yield return createNewMessageFromYou("Ну разве что вот такая.");
+        yield return createImageFromYou(2, "");
 
         setButtonOptionsAndShow(
-     "Ué pq não pode??", () => StartCoroutine(chat65()),
-     "Mais cedo que 17:00?? kkkkkk", () => StartCoroutine(chat66()),
-     "Pode sim", () => StartCoroutine(chat67())
+     "Да, ты просто шикарно выглядишь! У тебя талант!", () => StartCoroutine(chat65()),
+     "CLOSE2", () => StartCoroutine(chat62()),
+     "CLOSE3", () => StartCoroutine(chat63())
      );
     }
 
@@ -954,18 +955,18 @@ public class GameManager : MonoBehaviour
         Debug.Log("Cha65");
         ButtonPanel.SetActive(false);
 
-        yield return createNewMessageFromMe("Ué pq não pode?",true); //apaga
-        yield return createNewMessageFromMe("16:00 então?"); // reescreve com esse texto
-        yield return createNewMessageFromYou("Acho que esse horário fica massa");
-        yield return createNewMessageFromYou("Lá pelas 16:00 chego ai então");
-        yield return createNewMessageFromYou("Fica esperto ein😠");
-        yield return createNewMessageFromMe("Feshoww");
 
-        textoFadeImage.text = "(TERES)";
-        diaFadeImage.text = "Mais tarde no mesmo dia";
-        posTransicao = "chat685";
-        novoDia = "Dom 22:16";
-        animationEnabled = true;
+        yield return createNewMessageFromMe("Да, ты просто шикарно выглядишь!");
+        yield return createNewMessageFromMe("У тебя талант!");
+        yield return createNewMessageFromYou("Ты мне льстишь. ");
+        yield return createNewMessageFromYou("Это, наверно хороший фотограф.");
+
+        setButtonOptionsAndShow(
+        "Да я уверен! Скинь любую другую фотку!", () => StartCoroutine(chat66()),
+        "CLOSE2", () => StartCoroutine(chat62()),
+        "CLOSE3", () => StartCoroutine(chat63())
+        );
+
     }
 
     public IEnumerator chat66()
@@ -973,37 +974,35 @@ public class GameManager : MonoBehaviour
         Debug.Log("Cha66");
         ButtonPanel.SetActive(false);
 
-        yield return createNewMessageFromMe("Mais cedo que 17:00? kk",true); //apaga
-        yield return createNewMessageFromMe("16:00 então?"); // reescreve com esse texto
-        yield return createNewMessageFromYou("Acho que esse horário fica massa");
-        yield return createNewMessageFromYou("Lá pelas 16:00 chego ai então");
-        yield return createNewMessageFromYou("Fica esperto ein😠");
-        yield return createNewMessageFromMe("Feshoww");
-        
-        textoFadeImage.text = "(TERES)";
-        diaFadeImage.text = "Mais tarde no mesmo dia";
-        posTransicao = "chat685";
-        novoDia = "Dom 22:16";
-        animationEnabled = true;
-    }
+        yield return createNewMessageFromMe("Да я уверен! Скинь любую другую фотку!"); 
+        yield return createNewMessageFromYou("Ну вот к примеру эта");
+        yield return createImageFromYou(3, "");
+
+        setButtonOptionsAndShow(
+        "И снова супер! У тебя талант!", () => StartCoroutine(chat67()),
+        "CLOSE2", () => StartCoroutine(chat62()),
+        "CLOSE3", () => StartCoroutine(chat63())
+        );
+
+     }
 
     public IEnumerator chat67()
     {
         Debug.Log("Cha67");
         ButtonPanel.SetActive(false);
 
-        yield return createNewMessageFromMe("pode sim"); // NÃO APAGA
-        yield return createNewMessageFromMe("16:00 então?"); // reescreve com esse texto
-        yield return createNewMessageFromYou("Acho que esse horário fica massa");
-        yield return createNewMessageFromYou("Lá pelas 16:00 chego ai então", true);
-        yield return createNewMessageFromYou("Fica esperto ein😠");
-        yield return createNewMessageFromMe("Feshoww");
+        yield return createNewMessageFromMe("И снова супер! У тебя талант!");
+        yield return createNewMessageFromMe("Могу я тебя поснимать?");
+        yield return createNewMessageFromMe("Возможно даже за деньги!");
+        yield return createNewMessageFromYou("За деньги?");
+        yield return createNewMessageFromYou("Ну я даже не знаю.");
 
-        textoFadeImage.text = "(TERES)";
-        diaFadeImage.text = "Mais tarde no mesmo dia";
-        posTransicao = "chat685";
-        novoDia = "Dom 22:16";
-        animationEnabled = true;
+        setButtonOptionsAndShow(
+        "Соглашайся! Будет весело!", () => StartCoroutine(chat685()),
+        "CLOSE2", () => StartCoroutine(chat62()),
+        "CLOSE3", () => StartCoroutine(chat63())
+        );
+
     }
 
     public IEnumerator chat685()
@@ -1012,12 +1011,15 @@ public class GameManager : MonoBehaviour
         Debug.Log("Cha685");
         ButtonPanel.SetActive(false);
 
-        yield return createNewMessageFromMe("Eai");
+        yield return createNewMessageFromMe("Соглашайся! Будет весело!");
+        yield return createNewMessageFromMe("И прибыльно для тебя! :)");
+        yield return createNewMessageFromYou("Хорошо.");
+        yield return createNewMessageFromYou("А где мы будем снимать?");
 
         setButtonOptionsAndShow(
-     "Resenha demais nosso papo", () => StartCoroutine(chat68()),
-     "Meu aquele teres tava muito bom", () => StartCoroutine(chat69()),
-     "A mãe adorou conversar contigo ein", () => StartCoroutine(chat70())
+     "Я чуть позже сброшу тебе локацию и время!", () => StartCoroutine(chat68()),
+     "CLOSE2", () => StartCoroutine(chat62()),
+     "CLOSE3", () => StartCoroutine(chat63())
      );
     }
 
@@ -1026,14 +1028,15 @@ public class GameManager : MonoBehaviour
         Debug.Log("Cha68");
         ButtonPanel.SetActive(false);
 
-        yield return createNewMessageFromMe("Resenha demais nosso papo");
-
-        novoDia = "Seg 19:36";
-        animationEnabled = true;
-        textoFadeImage.text = "Deve ter dormido";
-        diaFadeImage.text = "Seg 19:36";
-        posTransicao = "chat715";
-
+        yield return createNewMessageFromMe("Я чуть позже сброшу тебе локацию и время!");
+        yield return createNewMessageFromMe("Хорошо?");
+        yield return createNewMessageFromYou("Хорошо, договорились!");
+        yield return createNewMessageFromYou("Буду ждать!");
+        setButtonOptionsAndShow(
+     "CLOSE1", () => StartCoroutine(chat68()),
+     "CLOSE2", () => StartCoroutine(chat62()),
+     "CLOSE3", () => StartCoroutine(chat63())
+     );
     }
     
     public IEnumerator chat69()
@@ -1041,13 +1044,16 @@ public class GameManager : MonoBehaviour
         Debug.Log("Cha69");
         ButtonPanel.SetActive(false);
 
-        yield return createNewMessageFromMe("Meu aquele teres tava muito bom");
+        yield return createNewMessageFromMe("Думал, сможешь скинуть фотки посмотреть!");
+        yield return createNewMessageFromMe("Ты наверно на них круто выглядишь!");
+        yield return createNewMessageFromYou("С какой стати я буду сбрасывать тебе свои фотки?");
+        yield return createNewMessageFromYou("Ты вообще кто такой?");
 
-        novoDia = "Seg 19:36";
-        animationEnabled = true;
-        textoFadeImage.text = "Deve ter dormido";
-        diaFadeImage.text = "Seg 19:36";
-        posTransicao = "chat715";
+        setButtonOptionsAndShow(
+        "Я друг Миши!", () => StartCoroutine(chat70()),
+        "CLOSE2", () => StartCoroutine(chat62()),
+        "CLOSE3", () => StartCoroutine(chat63())
+);
     }
     
     public IEnumerator chat70()
@@ -1055,13 +1061,16 @@ public class GameManager : MonoBehaviour
         Debug.Log("Cha70");
         ButtonPanel.SetActive(false);
 
-        yield return createNewMessageFromMe("A mãe adorou conversar contigo ein🥺");
-
-        novoDia = "Seg 19:36";
-        animationEnabled = true;
-        textoFadeImage.text = "Deve ter dormido";
-        diaFadeImage.text = "Seg 19:36";
-        posTransicao = "chat715";
+        yield return createNewMessageFromMe("Я друг Миши!");
+        yield return createNewMessageFromMe("Он сказал, что ты классная!");
+        yield return createNewMessageFromMe("И я решил познакомиться!");
+        yield return createNewMessageFromYou("Во первых мне не интересно знакомиться по переписке!");
+        yield return createNewMessageFromYou("Во вторых, я не скидываю всяким непонятным личностям свои фото!");
+        setButtonOptionsAndShow(
+        "Я друг Миши!", () => StartCoroutine(chat70()),
+        "CLOSE2", () => StartCoroutine(chat62()),
+        "CLOSE3", () => StartCoroutine(chat63())
+        );
     }
     
     public IEnumerator chat715()
