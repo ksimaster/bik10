@@ -1051,7 +1051,7 @@ public class GameManager : MonoBehaviour
 
         setButtonOptionsAndShow(
         "Я друг Миши!", () => StartCoroutine(chat70()),
-        "CLOSE2", () => StartCoroutine(chat62()),
+        "Просто парень, которому ты понравилась!", () => StartCoroutine(chat82()),
         "CLOSE3", () => StartCoroutine(chat63())
 );
     }
@@ -1283,13 +1283,15 @@ public class GameManager : MonoBehaviour
         Debug.Log("Cha82");
         ButtonPanel.SetActive(false);
 
-        yield return createNewMessageFromMe("Tem certeza?");
-        yield return createNewMessageFromYou("Relaxa, ta td certo");
-        yield return createNewMessageFromYou("Só tava ocupada");
-        yield return createNewMessageFromYou("O José tava aqui");
+        yield return createNewMessageFromMe("Просто парень, которому ты понравилась!");
+        yield return createNewMessageFromMe("Ты очень сексуальна на аватарке!");
+        yield return createNewMessageFromMe("А что на полной фотке?");
+        yield return createNewMessageFromYou("Не покажу!");
+        yield return createNewMessageFromYou("Вот, если бы я тебе и правда понравилась, то ты бы начал общаться как-то ласковей!");
+
 
         setButtonOptionsAndShow(
-     "Se aconteceu algo pode me contar", () => StartCoroutine(chat85()),
+     "Прости, детка! Ты просто сводишь меня с ума!", () => StartCoroutine(chat85()),
      "Ele fez alguma coisa?", () => StartCoroutine(chat86()),
      "Entendi", () => StartCoroutine(chat84())
      );
