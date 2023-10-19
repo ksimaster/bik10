@@ -10228,8 +10228,9 @@ MonoBehaviour:
   botoesFundo: {fileID: 1615265710}
   fotoMaria: {fileID: 0}
   imageGirl:
-  - {fileID: -3414680812854303716, guid: 4028d3ca1f0a40b459944f727e62ca25, type: 3}
-  - {fileID: -7895962565647042034, guid: 09bb1bfb429685a45ad834da65013f28, type: 3}
+  - {fileID: 21300000, guid: e995439af2694514381ad4d5d73df5ff, type: 3}
+  - {fileID: 21300000, guid: e995439af2694514381ad4d5d73df5ff, type: 3}
+  - {fileID: 21300000, guid: e995439af2694514381ad4d5d73df5ff, type: 3}
   - {fileID: 21300000, guid: e995439af2694514381ad4d5d73df5ff, type: 3}
   botao1: {fileID: 1561543129}
   botao2: {fileID: 395073804}
@@ -14092,7 +14093,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1553196860137988056}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.999984
+  m_Size: 0.99999887
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
