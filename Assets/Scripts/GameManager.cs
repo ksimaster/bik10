@@ -2,6 +2,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Video;
 using System.Reflection;
 using UnityEngine.Events;
 
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
     public GameObject rightMessagePrefab;
     public GameObject leftMessagePrefab;
     public GameObject imageLeftMessagePrefab;
+    public GameObject videoLeftMessagePrefab;
     public GameObject noticiaPrefab;
     public float messagePreDelay = 3.0f; // Tempo de atraso entre as mensagens
     public float messagePosDelay = 3.0f; // Tempo de atraso entre as mensagens
@@ -28,6 +30,7 @@ public class GameManager : MonoBehaviour
     public Image botoesFundo;
     public Image fotoMaria;
     public Sprite [] imageGirl;
+    public VideoClip[] videoGirl;
    // public Sprite bigImage;
 
     public Button botao1;
@@ -183,7 +186,9 @@ public class GameManager : MonoBehaviour
         ButtonPanel.SetActive(false);
         yield return createNewMessageFromMe("Привет! Миша сказал, что ты хочешь стать моделью. Это правда?");
         yield return createNewMessageFromYou("Привет! Да, правда");
-       
+        yield return createVideoFromYou(0, "");
+        yield return createNewMessageFromYou("Вот смотри!");
+
         setButtonOptionsAndShow(
     "Тогда я тот, кто может тебе помочь!...", () => StartCoroutine(chat3()),
     "Это классно! Ты занималась где-то?", () => StartCoroutine(chat34()),
@@ -1771,6 +1776,15 @@ public class GameManager : MonoBehaviour
     {
         imageLeftMessagePrefab.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = imageGirl[numberFoto];
         yield return waitSecondsAndCreateDialogChat(imageLeftMessagePrefab, mensagem, vaiSerDeletada, preDelay, posDelay);
+        PlayerPrefs.SetFloat("Timer", PlayerPrefs.GetFloat("Timer") - timeFoto);
+        Debug.Log(PlayerPrefs.GetFloat("Timer"));
+    }
+
+    public IEnumerator createVideoFromYou(int numberVideo, string mensagem = "", bool vaiSerDeletada = false, float preDelay = 0f, float posDelay = 0f)
+    {
+        videoLeftMessagePrefab.transform.GetChild(0).gameObject.GetComponent<VideoPlayer>().clip = videoGirl[numberVideo];
+       // videoLeftMessagePrefab.transform.GetChild(0).gameObject.GetComponent<VideoPlayer>().
+        yield return waitSecondsAndCreateDialogChat(videoLeftMessagePrefab, mensagem, vaiSerDeletada, preDelay, posDelay);
         PlayerPrefs.SetFloat("Timer", PlayerPrefs.GetFloat("Timer") - timeFoto);
         Debug.Log(PlayerPrefs.GetFloat("Timer"));
     }
