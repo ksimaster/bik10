@@ -7,7 +7,7 @@ using UnityEngine.Video;
 public class BigVideo : MonoBehaviour
 {
     private GameObject bigVideo;
-    public float timeFotoBig = 10f;
+    public float timeVideoBig = 10f;
 
     private void Start()
     {
@@ -17,7 +17,7 @@ public class BigVideo : MonoBehaviour
     }
     public void ToBigVideo()
     {
-        PlayerPrefs.SetFloat("Timer", PlayerPrefs.GetFloat("Timer") - timeFotoBig);
+        PlayerPrefs.SetFloat("Timer", PlayerPrefs.GetFloat("Timer") - timeVideoBig);
         Debug.Log(PlayerPrefs.GetFloat("Timer"));
         bigVideo.SetActive(true);
         bigVideo.transform.GetChild(0).gameObject.SetActive(true);
