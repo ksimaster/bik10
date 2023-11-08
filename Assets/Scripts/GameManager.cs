@@ -186,7 +186,8 @@ public class GameManager : MonoBehaviour
         ButtonPanel.SetActive(false);
         yield return createNewMessageFromMe("Привет! Миша сказал, что ты хочешь стать моделью. Это правда?");
         yield return createNewMessageFromYou("Привет! Да, правда");
-        yield return createVideoFromYou(0, "");
+        //yield return createVideoFromYou(0, "");
+        yield return createImageFromYou(0, "");
         yield return createNewMessageFromYou("Вот смотри!");
 
         setButtonOptionsAndShow(
@@ -205,14 +206,25 @@ public class GameManager : MonoBehaviour
 
         yield return createNewMessageFromMe("Тогда я тот, кто может тебе помочь!");
         yield return createNewMessageFromMe("Я фотограф и работаю с различными агентствами :)");
-        yield return createNewMessageFromYou("Это, конечно, прикольно. Но как? У меня нет денег на фотосессию.");
-        yield return createNewMessageFromYou("Или это такой подкат?");
+        yield return createNewMessageFromMe("А может у тебя и видео какое-то есть?");
+        // yield return createNewMessageFromYou("Это, конечно, прикольно. Но как? У меня нет денег на фотосессию.");
+        //yield return createNewMessageFromYou("Или это такой подкат?");
+        yield return createNewMessageFromYou("Да! У меня свой канал есть!");
+        yield return createVideoFromYou(0, "");
+        yield return createNewMessageFromYou("Как я тебе?");
 
+/*
         setButtonOptionsAndShow(
             "Денег не потребуется...", () => StartCoroutine(chat4()),
             "Красивая девушка может расплатиться и иначе!...", () => StartCoroutine(chat5()),
             "CLOSE3", () => StartCoroutine(chat7())
         );
+        */
+        setButtonOptionsAndShow(
+    "Фигурка супер! Я бы с тобой...", () => StartCoroutine(chat4()),
+    "А без одежды есть видео?...", () => StartCoroutine(chat5()),
+    "CLOSE3", () => StartCoroutine(chat7())
+);
     }
 
     public IEnumerator chat4()
